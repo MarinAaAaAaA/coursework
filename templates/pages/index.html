@@ -1,0 +1,94 @@
+{% extends 'base.html' %} {%block title%}Главная{%endblock%}
+{%block nav_links%} {%for cat in cats%}
+<p class="block__item">
+    <a href='/category/{{cat.id}}' class="block__link main-text">{{cat.title}}</a>
+</p>
+{%endfor%} {%endblock nav_links%}
+
+<!-- НОВИНКИ -->
+{% block content%}
+<article class="news">
+    <h2 class="visually-hidden">Новинки</h2>
+    <div class="content wrapper">
+        <h2 class="news__title">Вакансии дня в Москве</h2>
+
+        <div class="items">
+            {%for item in items%}
+            <div class="items__item">
+                <img src="/media/{{item.image}}" alt="Фото компании" class="items__photo" />
+                <div class="items__content">
+                    <p class="items__title buttons-text">{{item.title}}</p>
+                    
+                
+                    <div class="items__cost">
+                        <p class="buttons-text">{{item.price}}&#8381;</p>
+                    </div>
+                    <div class="items__buttons">
+                        <form action="/favorite/add/{{item.id}}" method="POST">
+                            {%csrf_token%}
+                            <button class="little-button-cart subtitle">
+                               В избранное
+                            </button>
+                        </form>
+                        <a href="/products/{{item.id}}" class="little-button-more subtitle">
+                            Подробнее
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</article>
+
+<!-- КАТЕГОРИИ -->
+
+<article class="categories" id='categories'>
+    <div class="categories__content wrapper">
+        {%for cat in more_cats%}
+        <a href="/category/{{cat.id}}" class="categories__category"
+            style="background-image: url('/media/{{cat.image}}')">
+            <div class="brown">
+                <h2>{{cat.title}}</h2>
+            </div>
+        </a>
+        {%endfor%}
+    </div>
+</article>
+
+<!-- САМОЕ ПОПУЛЯРНОЕ -->
+
+<article class="most-popular">
+    <h2 class="visually-hidden">Самое популярное</h2>
+    <div class="most-popular__content wrapper">
+        <h2 class="most-popular__title">Работа в компаниях</h2>
+        <div class="items">
+            {%for item in big_items%}
+            <div class="items__item">
+                <img src="media/{{item.image}}" alt="Фото товара" class="items__photo" />
+                <div class="items__content">
+                    <p class="items__title buttons-text">{{item.title}}</p>
+                
+                    
+                    <div class="items__cost">
+                        <p class="buttons-text">{{item.price}}&#8381;</p>
+                    </div>
+                    <div class="items__buttons">
+                        <form action="/basket/add/{{item.id}}" method="POST">
+                            {%csrf_token%}
+                            <button class="little-button-cart subtitle">
+                               В избранное
+                            </button>
+                        </form>
+                        <a href='/products/{{item.id}}' class="little-button-more subtitle">
+                            Подробнее
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</article>
+
+{% endblock %}

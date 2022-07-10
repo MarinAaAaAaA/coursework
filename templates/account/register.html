@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {%block title%}Зарегистрироваться{%endblock%}
+{%block nav_links%} {%for cat in cats%}
+<p  class="block__item">
+    <a href='/category/{{cat.id}}' class="block__link main-text">{{cat.title}}</a>
+</p>
+{%endfor%} {%endblock nav_links%}
+{% block content %}
+    <h1 style="background-color: bisque;text-align: center;padding-top: 100px">Регистрация</h1>
+    <p style="background-color: bisque;text-align: center;padding-top: 20px">Чтобы зарегистрироваться, заполните данные:</p>
+    <form  style="background-color: bisque;text-align: center;padding-top: 50px" action="." method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button style="height: 50px;width: 200px; margin-top: 20px;" type="submit" class="little-button-cart subtitle">Зарегистрироваться</button>
+    </form>
+    <p style="background-color:  bisque;text-align: center; padding-bottom: 50px; padding-top:20px; ">
+        <button style="background-color: #0000; height: 50px; width: 200px;">
+    <a  style="text-decoration: none" href="/login/">Войти</a>
+    </button>
+    </p>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {%block title%}{{seller.title}}{%endblock%}
+{%block nav_links%} {%for cat in cats%}
+<p class="block__item">
+    <a href='/category/{{cat.id}}' class="block__link main-text">{{cat.title}}</a>
+</p>
+{%endfor%} {%endblock nav_links%}
+{% block content%}
+<div style="display: flex; justify-content: center; align-items: center; min-height: 100px; flex-direction: column;">
+    <h1>{{seller.name}}</h1>
+    <p>{{seller.description}}</p>
+    <p>{{seller.contacts}}</p>
+    {%for product in products%}
+    <div style="display: flex; justify-content: center; align-items: center; min-height: 100px; flex-direction: column;">
+        <h1><a href="/products/{{product.id}}">{{product.title}}</a></h1>
+        <p>{{product.description}}</p>
+        <p>{{product.price}} P</p>
+        <p>{{product.article}}</p>
+        <img width="400px"  src="/media/{{product.image}}" alt="{{product.title}}">
+    </div>
+    {%endfor%}
+</div>
+{% endblock %}

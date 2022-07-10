@@ -1,0 +1,53 @@
+<!-- Подробная информация вакансии -->
+{% extends 'base.html' %} {%block title%}{{product.title}}{%endblock%}
+{%block nav_links%} {%for cat in cats%}
+<p class="block__item">
+    <a href='/category/{{cat.id}}' class="block__link main-text">{{cat.title}}</a>
+</p>
+{%endfor%} {%endblock nav_links%}
+{% block content%}
+<div
+    style="background-color:bisque; display: flex; justify-content: center; align-items: center; min-height: 100px; flex-direction: column;">
+    <h1 style="padding-right:470px; margin-top:57px ;">{{product.title}}</h1>
+    <a style="padding-right:470px; " href="/sellers/{{product.seller.id}}">{{product.seller}}</a>
+    <img style="padding-left: 450px; margin-top: -90px;" width="400px" src="/media/{{product.image}}"
+        alt="{{product.title}}">
+    <div style="padding-right:470px; margin-top: -50px;">
+        {%for cat in product_cats%}
+        <a href='/category/{{cat.id}}'>{{cat.title}}</a>
+        <!-- Удаленная работа -->
+        {%endfor%}
+    </div>
+    <p style="padding-right:470px;">{{product.price}} P</p>
+    <p style="text-align: left; margin-top: 50px;">{{product.description}}</p>
+    <p style="padding-right:470px;">{{product.article}}</p>
+
+    <form action="/basket/add/{{product.id}}" method="POST">
+        {%csrf_token%}
+        <button style="margin-top: 50px; height: 50px;" class="little-button-cart subtitle">
+            Добавить в избранное
+        </button>
+    </form>
+
+
+    <form style="margin-top: 50px;padding-right:1070px; margin-bottom: 50px; flex-direction: column;" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button style="margin-top: 50px" type="submit" class="little-button-cart subtitle">Задать вопрос </button>
+
+    </form>
+</div>
+<div>
+    {%for rating in ratings%}
+
+    <div style="display: flex; flex-direction: column; margin-top: 65px;">
+        <span>
+            Пользователь {{rating.creator}}
+        </span>
+        <h3>Имя: {{rating.title}}</h3>
+        <h4>Вопрос: {{rating.text}}</h4>
+    </div>
+
+    {%endfor%}
+</div>
+{% endblock %}

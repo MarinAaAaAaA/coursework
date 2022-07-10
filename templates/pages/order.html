@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {%block title%}Попытка №{{order.id}}{%endblock%}
+{%block nav_links%} {%for cat in cats%}
+<p class="block__item">
+    <a href='/category/{{cat.id}}' class="block__link main-text">{{cat.title}}</a>
+</p>
+{%endfor%} {%endblock nav_links%}
+{% block content %}
+<h1 style="background-color: bisque;padding-top: 100px">Отправленные резюме(попытка№{{order.id}})</h1>
+<h2 style="background-color: bisque;padding-top: 50px">Подробная информация:</h2>
+<ul>
+{%for product in products%}
+<li style="background-color: bisque;padding-top: 50px; padding-bottom: 50px;">{{product.title}}</li>
+{%endfor%}
+</ul>
+
+{% endblock %}

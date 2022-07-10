@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search work. {% block title %}{% endblock %}</title>
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__section">
+            <article class="header__navbar navbar wrapper">
+                <h2 class="visually-hidden">О нас</h2>
+
+                <!-- 1200 - БЕСКОНЕЧНОСТЬ -->
+
+                <div class="navbar__block block menu">
+                    {%block nav_links%}
+                    {%endblock%}
+                    <button class="block__item phone-link mini-link">
+                        <a href='/#categories' class="block__item block__dots buttons-text">Другое</a>
+                    </button>
+
+                </div>
+                <div class="navbar__block block logo">
+                    <a href="/">
+                        <img class="search" src="../media/img/search.png">
+                    </a>
+                </div>
+                <div class="navbar__block block phone">
+                    <button class="block__item phone-link mini-link">
+                        <a class="but2" href="/leave-callback/">
+                            Появились вопросы?
+                        </a>
+                    </button>
+                    {% if user.is_authenticated %}
+                    <p class="block__item">
+                        <a href="/profile/" class="block__link main-text">
+                            Привет, {{user.username}}
+                        </a>
+                    </p>
+                    <p class="block__item">
+                        <a href="/logout/" class="block__link main-text">Выйти◥</a>
+                    </p>
+                    {% else %}
+                    <p class="block__item">
+                        <a href="/register/" class="block__link main-text">Регистрация◥</a>
+                    </p>
+                    <p class="block__item">
+                        <a href="/login/" class="block__link main-text">Войти◥</a>
+                    </p>
+                    {% endif %}
+
+                    <a href="/basket/" class="block__link main-text">
+                        Избранное
+                    </a>
+                </div>
+
+
+            </article>
+        </div>
+
+        <div class="header__main wrapper">
+            <div class="header__offer offer">
+                <h1 class="offer__item">
+                    Работа в России
+                </h1>
+                <p class="offer__item offer__subtitle subtitle-regular">
+                    Работа составляет большую часть жизни почти каждого из нас. Но ничто не вечно: случается, что
+                    однажды приходится менять место работы и с головой погружаться в поиски вакансий — хочется ведь
+                    найти хорошую альтернативу текущей должности.
+                </p>
+                <button class="offer__item big-button buttons-text">
+                    <a class="but1" href='/products/'>
+                        Просмотреть вакансии
+                    </a>
+                </button>
+            </div>
+        </div>
+
+    </header>
+
+
+
+    <main class="main">
+    <div class="cv">
+            {% block content %}
+            {% endblock %}
+            <!-- НЕМНОГО О НАС -->
+    </div>
+        <article class="about">
+            <div class="about__content wrapper">
+                <h2 class="about__title">Работа найдется для каждого</h2>
+
+        </article>
+
+    </main>
+</body>
+
+</html>
